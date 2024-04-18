@@ -138,14 +138,14 @@ struct Playlist *certainPos() {
     return head;
 }
 
-void pop_head(){
+void deleteFirstSong(){
 	struct Playlist *temp = head;
 	head = head->next;
 	head->prev = NULL;
 	free(temp);	
 }
 
-void pop_tail(){
+void deleteLastSong(){
     struct Playlist *toBeDel = head;
     struct Playlist *temp;
     while(toBeDel->next != NULL){
@@ -165,7 +165,7 @@ struct Playlist *deleteAtCertainPos() {
     struct Playlist *temp2;
 
     if (position == 1) {
-        pop_head();
+        deleteFirstSong();
     } else {
         while (position > 1 && temp != NULL) {
             temp = temp->next;
@@ -173,7 +173,7 @@ struct Playlist *deleteAtCertainPos() {
         }
 
         if (temp->next == NULL) {
-            pop_tail();
+            deleteLastSong();
         } else {
             temp2 = temp->prev;
             temp2->next = temp->next;
@@ -283,12 +283,12 @@ int main (){
 				break;
 			case 4:
 				system("cls");
-				pop_head();
+				deleteFirstSong();
 				printf("Playlist has been successfully updated!\n");
 				break;
 			case 5:
 				system("cls");
-				pop_tail();
+				deleteLastSong();
 				printf("Playlist has been successfully updated!\n");
 				break;
 			case 6:
